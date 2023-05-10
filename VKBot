@@ -1,0 +1,1006 @@
+' Listing created by VB Decompiler v9.2.20291
+' Application: C:\Users\ADMIN\Desktop\��� �����������\����������� ��������\�������� ���������� �� �����\VKBot.exe
+' Compiled to: .NET Assembly
+' Compiler version: 2.5
+
+'Object: VKBot.Program
+Main
+
+  Code: FatFormat
+  Start: 40205C
+  Size: 516
+  Flag: MoreSects InitLocals
+  Max Stack: 3
+  Local Variables: 11000001
+
+  loc_40205C: push "VKBot | "
+  loc_402061: ldsfld gitRepo
+  loc_402066: call Concat
+  loc_40206B: call set_Title
+  loc_402070: ldc.i4.s 11
+  loc_402072: call logo
+  loc_402077: ldloca.s 0
+  loc_402079: ldloca.s 1
+  loc_40207B: call GetMaxThreads
+  loc_402080: ldc.i4.s 15
+  loc_402082: call set_ForegroundColor
+  loc_402087: push "Максимальное кол-во потоков: "
+  loc_40208C: call Write
+  loc_402091: ldc.i4.s 11
+  loc_402093: call set_ForegroundColor
+  loc_402098: ldloc.1
+  loc_402099: call WriteLine
+  loc_40209E: call WriteLine
+  loc_4020A3: ldc.i4.s 11
+  loc_4020A5: call logo
+  loc_4020AA: ldc.i4.s 15
+  loc_4020AC: call set_ForegroundColor
+  loc_4020B1: push "Введите URL видео/клипа: "
+  loc_4020B6: call Write
+  loc_4020BB: ldc.i4.s 11
+  loc_4020BD: call set_ForegroundColor
+  loc_4020C2: call ReadLine
+  loc_4020C7: callvirt Trim
+  loc_4020CC: callvirt ToLower
+  loc_4020D1: stsfld vdata
+  loc_4020D6: ldsfld patternVideoData
+  loc_4020DB: ldsfld vdata
+  loc_4020E0: callvirt Match
+  loc_4020E5: dup
+  loc_4020E6: callvirt get_Groups
+  loc_4020EB: ldc.i4.2
+  loc_4020EC: callvirt get_Item
+  loc_4020F1: callvirt get_Value
+  loc_4020F6: stsfld owner
+  loc_4020FB: callvirt get_Groups
+  loc_402100: ldc.i4.3
+  loc_402101: callvirt get_Item
+  loc_402106: callvirt get_Value
+  loc_40210B: stsfld vid
+  loc_402110: ldc.i4.s 11
+  loc_402112: call logo
+  loc_402117: ldc.i4.s 15
+  loc_402119: call set_ForegroundColor
+  loc_40211E: push "Введите кол-во потоков: "
+  loc_402123: call Write
+  loc_402128: ldc.i4.s 11
+  loc_40212A: call set_ForegroundColor
+  loc_40212F: call ReadLine
+  loc_402134: callvirt Trim
+  loc_402139: call ToInt32
+  loc_40213E: stsfld threadsCount
+  loc_402143: ldc.i4.s 11
+  loc_402145: call logo
+  loc_40214A: ldc.i4.s 15
+  loc_40214C: call set_ForegroundColor
+  loc_402151: push "Выберите тип прокси:\r\n0. Публичные (Socks4 autoscrape)\r\n1. Http/s\r\n2. Socks4\r\n3. Socks5"
+  loc_402156: call WriteLine
+  loc_40215B: push "Ваш выбор: "
+  loc_402160: call Write
+  loc_402165: ldc.i4.s 11
+  loc_402167: call set_ForegroundColor
+  loc_40216C: call ReadKey
+  loc_402171: stloc.s 4
+  loc_402173: ldloca.s 4
+  loc_402175: call get_KeyChar
+  loc_40217A: stloc.3
+  loc_40217B: ldloca.s 3
+  loc_40217D: call ToString
+  loc_402182: call Parse
+  loc_402187: stloc.s 5
+  loc_402189: ldloc.s 5
+  loc_40218B: ldc.i4.0
+  loc_40218C: blt.s loc_402193
+  loc_40218E: ldloc.s 5
+  loc_402190: ldc.i4.3
+  loc_402191: ble.s loc_402199
+  loc_402193: newobj .ctor
+  loc_402198: throw
+  loc_402199: ldloc.s 5
+  loc_40219B: stsfld proxyType
+  loc_4021A0: leave.s loc_4021A5
+  loc_4021A2: pop
+  loc_4021A3: leave.s loc_402243
+  loc_4021A5: ldc.i4.s 15
+  loc_4021A7: call set_ForegroundColor
+  loc_4021AC: push "\r\nВыбрано{0} прокси"
+  loc_4021B1: ldsfld proxyType
+  loc_4021B6: box VKBot.Helpers.UsedProxyType
+  loc_4021BB: call Format
+  loc_4021C0: call WriteLine
+  loc_4021C5: ldsfld proxyType
+  loc_4021CA: brfalse.sbrnull.sbrzero.s loc_40220C
+  loc_4021CC: push "Откройте файл со списком прокси"
+  loc_4021D1: call WriteLine
+  loc_4021D6: newobj .ctor
+  loc_4021DB: stloc.s 6
+  loc_4021DD: ldloc.s 6
+  loc_4021DF: push "Список прокси (*.txt)|*.txt"
+  loc_4021E4: callvirt set_Filter
+  loc_4021E9: ldloc.s 6
+  loc_4021EB: callvirt ShowDialog
+  loc_4021F0: ldc.i4.1
+  loc_4021F1: beq.s loc_4021F4
+  loc_4021F3: ret
+  loc_4021F4: ldloc.s 6
+  loc_4021F6: callvirt get_FileName
+  loc_4021FB: ldsfld proxyType
+  loc_402200: newobj .ctor
+  loc_402205: stsfld scraper
+  loc_40220A: br.s loc_402216
+  loc_40220C: newobj .ctor
+  loc_402211: stsfld scraper
+  loc_402216: ldc.i4.s 10
+  loc_402218: call logo
+  loc_40221D: newobj .ctor
+  loc_402222: stloc.2
+  loc_402223: ldc.i4.0
+  loc_402224: stloc.s 7
+  loc_402226: br.s loc_402250
+  loc_402228: ldnull
+  loc_402229: ldftn worker
+  loc_40222F: newobj .ctor
+  loc_402234: newobj .ctor
+  loc_402239: stloc.s 8
+  loc_40223B: ldloc.s 8
+  loc_40223D: callvirt 
+  loc_402242: ldloc.2
+  loc_402243: ldloc.s 8
+  loc_402245: callvirt Add
+  loc_40224A: ldloc.s 7
+  loc_40224C: ldc.i4.1
+  loc_40224D: add
+  loc_40224E: stloc.s 7
+  loc_402250: ldloc.s 7
+  loc_402252: ldsfld threadsCount
+  loc_402257: blt.s loc_402328
+  loc_402259: call ReadKey
+  loc_40225E: pop
+  loc_40225F: ret
+
+  .try loc_40217B to loc_4021A2 catch handler loc_4021A2 to loc_4021A5
+
+
+logo
+
+  Code: TinyFormat
+  Start: 402271
+  Size: 55
+
+  loc_402271: call Clear
+  loc_402276: push Me
+  loc_402277: call set_ForegroundColor
+  loc_40227C: ldsfld intro
+  loc_402281: call WriteLine
+  loc_402286: ldc.i4.s 15
+  loc_402288: call set_ForegroundColor
+  loc_40228D: push Me
+  loc_40228E: call set_ForegroundColor
+  loc_402293: ldsfld gitRepo
+  loc_402298: call WriteLine
+  loc_40229D: call get_CursorTop
+  loc_4022A2: stsfld pos
+  loc_4022A7: ret
+
+
+logo
+
+  Code: FatFormat
+  Start: 4022B4
+  Size: 123
+  Flag: MoreSects InitLocals
+  Max Stack: 5
+  Local Variables: 11000002
+
+  loc_4022B4: ldsfld locker
+  loc_4022B9: stloc.0
+  loc_4022BA: ldc.i4.0
+  loc_4022BB: stloc.1
+  loc_4022BC: ldloc.0
+  loc_4022BD: ldloca.s 1
+  loc_4022BF: call Enter
+  loc_4022C4: ldc.i4.0
+  loc_4022C5: ldsfld pos
+  loc_4022CA: call SetCursorPosition
+  loc_4022CF: push "\r\nНакручено: {0}\r\nОшибок: {1}\r\nПрокси: {2}\r\nПотоков: {3}\r\n"
+  loc_4022D4: ldc.i4.4
+  loc_4022D5: newarr System.Object
+  loc_4022DA: dup
+  loc_4022DB: ldc.i4.0
+  loc_4022DC: ldsfld botted
+  loc_4022E1: box System.Int64
+  loc_4022E6: stelem.ref
+  loc_4022E7: dup
+  loc_4022E8: ldc.i4.1
+  loc_4022E9: ldsfld errors
+  loc_4022EE: box System.Int64
+  loc_4022F3: stelem.ref
+  loc_4022F4: dup
+  loc_4022F5: ldc.i4.2
+  loc_4022F6: ldsfld scraper
+  loc_4022FB: callvirt get_Proxies
+  loc_402300: callvirt get_Count
+  loc_402305: box System.
+  loc_40230A: stelem.ref
+  loc_40230B: dup
+  loc_40230C: ldc.i4.3
+  loc_40230D: ldsfld threadsCount
+  loc_402312: box System.
+  loc_402317: stelem.ref
+  loc_402318: call Format
+  loc_40231D: call WriteLine
+  loc_402322: leave.s loc_40232E
+  loc_402324: ldloc.1
+  loc_402325: brfalse.sbrnull.sbrzero.s loc_40232D
+  loc_402327: ldloc.0
+  loc_402328: call Exit
+  loc_40232D: endfinallyendfault
+  loc_40232E: ret
+
+  .try loc_4022BC to loc_402324 catch handler loc_402324 to loc_40232E
+
+
+worker
+
+  Code: FatFormat
+  Start: 40234C
+  Size: 422
+  Flag: MoreSects InitLocals
+  Max Stack: 5
+  Local Variables: 11000003
+
+  loc_40234C: ldc.i4.0
+  loc_40234D: ldc.i4.0
+  loc_40234E: newobj .ctor
+  loc_402353: stloc.0
+  loc_402354: ldloc.0
+  loc_402355: push "al"
+  loc_40235A: push "1"
+  loc_40235F: callvirt set_Item
+  loc_402364: ldloc.0
+  loc_402365: push "video"
+  loc_40236A: ldsfld owner
+  loc_40236F: push "_"
+  loc_402374: ldsfld vid
+  loc_402379: call Concat
+  loc_40237E: callvirt set_Item
+  loc_402383: ldloc.0
+  loc_402384: push "module"
+  loc_402389: push "direct"
+  loc_40238E: callvirt set_Item
+  loc_402393: nop
+  loc_402394: newobj .ctor
+  loc_402399: stloc.1
+  loc_40239A: ldsfld scraper
+  loc_40239F: callvirt 
+  loc_4023A4: stloc.3
+  loc_4023A5: ldloc.1
+  loc_4023A6: ldloc.3
+  loc_4023A7: callvirt get_Client
+  loc_4023AC: callvirt set_Proxy
+  loc_4023B1: ldloc.1
+  loc_4023B2: push "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0"
+  loc_4023B7: callvirt set_UserAgent
+  loc_4023BC: ldloc.1
+  loc_4023BD: push "https://vk.com/video"
+  loc_4023C2: ldsfld owner
+  loc_4023C7: push "_"
+  loc_4023CC: ldsfld vid
+  loc_4023D1: call Concat
+  loc_4023D6: ldnull
+  loc_4023D7: callvirt Get
+  loc_4023DC: stloc.2
+  loc_4023DD: ldsfld patternViewHash
+  loc_4023E2: ldloc.2
+  loc_4023E3: callvirt ToString
+  loc_4023E8: callvirt Match
+  loc_4023ED: callvirt get_Groups
+  loc_4023F2: ldc.i4.1
+  loc_4023F3: callvirt get_Item
+  loc_4023F8: callvirt get_Value
+  loc_4023FD: stloc.s 4
+  loc_4023FF: ldc.i4 1000
+  loc_402404: call Sleep
+  loc_402409: ldc.i4.0
+  loc_40240A: ldc.i4.0
+  loc_40240B: newobj .ctor
+  loc_402410: stloc.s 5
+  loc_402412: ldloc.s 5
+  loc_402414: push "al"
+  loc_402419: push "1"
+  loc_40241E: callvirt set_Item
+  loc_402423: ldloc.s 5
+  loc_402425: push "hash"
+  loc_40242A: ldloc.s 4
+  loc_40242C: callvirt set_Item
+  loc_402431: ldloc.s 5
+  loc_402433: push "oid"
+  loc_402438: ldsfld owner
+  loc_40243D: callvirt set_Item
+  loc_402442: ldloc.s 5
+  loc_402444: push "vid"
+  loc_402449: ldsfld vid
+  loc_40244E: callvirt set_Item
+  loc_402453: ldloc.1
+  loc_402454: push "TE"
+  loc_402459: push "Trailers"
+  loc_40245E: callvirt AddHeader
+  loc_402463: pop
+  loc_402464: ldloc.1
+  loc_402465: push "x-requested-with"
+  loc_40246A: push "XMLHttpRequest"
+  loc_40246F: callvirt AddHeader
+  loc_402474: pop
+  loc_402475: ldloc.1
+  loc_402476: push "https://vk.com/video"
+  loc_40247B: ldsfld owner
+  loc_402480: push "_"
+  loc_402485: ldsfld vid
+  loc_40248A: call Concat
+  loc_40248F: callvirt set_Referer
+  loc_402494: ldloc.1
+  loc_402495: push "https://vk.com/al_video.php?act=show"
+  loc_40249A: ldloc.0
+  loc_40249B: callvirt Post
+  loc_4024A0: pop
+  loc_4024A1: ldloc.1
+  loc_4024A2: push "https://vk.com/al_video.php?act=video_view_started"
+  loc_4024A7: ldloc.s 5
+  loc_4024A9: callvirt Post
+  loc_4024AE: pop
+  loc_4024AF: ldloc.1
+  loc_4024B0: push "https://vk.com/al_video.php?act=inc_view_counter"
+  loc_4024B5: ldloc.s 5
+  loc_4024B7: callvirt Post
+  loc_4024BC: pop
+  loc_4024BD: ldsflda botted
+  loc_4024C2: call Increment
+  loc_4024C7: pop
+  loc_4024C8: call 
+  loc_4024CD: br loc_402409
+  loc_4024D2: ldloc.1
+  loc_4024D3: brfalse.sbrnull.sbrzero.s loc_4024DB
+  loc_4024D5: ldloc.1
+  loc_4024D6: callvirt Dispose
+  loc_4024DB: endfinallyendfault
+  loc_4024DC: pop
+  loc_4024DD: ldsflda errors
+  loc_4024E2: call Increment
+  loc_4024E7: pop
+  loc_4024E8: call 
+  loc_4024ED: leave loc_402393
+
+  .try loc_40239A to loc_4024D2 finally handler loc_4024D2 to loc_4024DC
+  .try loc_402394 to loc_4024DC catch handler loc_4024DC to loc_4024F2
+
+
+.ctor
+
+  Code: TinyFormat
+  Start: 402529
+  Size: 7
+
+  loc_402529: push Me
+  loc_40252A: call .ctor
+  loc_40252F: ret
+
+
+.cctor
+
+  Code: FatFormat
+  Start: 40253C
+  Size: 83
+  Flag: InitLocals
+  Max Stack: 2
+  Local Variables: 0
+
+  loc_40253C: ldc.i4.0
+  loc_40253D: stsfld pos
+  loc_402542: ldc.i4.0
+  loc_402543: conv.i8
+  loc_402544: stsfld botted
+  loc_402549: ldc.i4.0
+  loc_40254A: conv.i8
+  loc_40254B: stsfld errors
+  loc_402550: newobj .ctor
+  loc_402555: stsfld locker
+  loc_40255A: push "???     ??  ?  ??  ????            ?   ?? ? ?   ? ? ? ?? ? ? ?? "
+  loc_40255F: stsfld intro
+  loc_402564: push "Petrosyan"
+  loc_402569: stsfld gitRepo
+  loc_40256E: push "(clip|video)(-?[0-9]+)_([0-9]+)"
+  loc_402573: ldc.i4.8
+  loc_402574: newobj .ctor
+  loc_402579: stsfld patternVideoData
+  loc_40257E: push ""view_hash":"([a-z0-9]+)""
+  loc_402583: ldc.i4.8
+  loc_402584: newobj .ctor
+  loc_402589: stsfld patternViewHash
+  loc_40258E: ret
+
+
+'Object: VKBot.Helpers.Program
+get_Address
+
+  Code: TinyFormat
+  Start: 402590
+  Size: 7
+
+  loc_402590: push Me
+  loc_402591: ldfld <Address>k__BackingField
+  loc_402596: ret
+
+
+set_Address
+
+  Code: TinyFormat
+  Start: 402598
+  Size: 8
+
+  loc_402598: push Me
+  loc_402599: push value
+  loc_40259A: stfld <Address>k__BackingField
+  loc_40259F: ret
+
+
+get_Client
+
+  Code: TinyFormat
+  Start: 4025A1
+  Size: 7
+
+  loc_4025A1: push Me
+  loc_4025A2: ldfld <Client>k__BackingField
+  loc_4025A7: ret
+
+
+set_Client
+
+  Code: TinyFormat
+  Start: 4025A9
+  Size: 8
+
+  loc_4025A9: push Me
+  loc_4025AA: push value
+  loc_4025AB: stfld <Client>k__BackingField
+  loc_4025B0: ret
+
+
+.ctor
+
+  Code: TinyFormat
+  Start: 4025B2
+  Size: 37
+
+  loc_4025B2: push Me
+  loc_4025B3: call .ctor
+  loc_4025B8: push Me
+  loc_4025B9: push proxy
+  loc_4025BA: callvirt Trim
+  loc_4025BF: call set_Address
+  loc_4025C4: push Me
+  loc_4025C5: push str_166
+  loc_4025C6: push Me
+  loc_4025C7: call get_Address
+  loc_4025CC: call Parse
+  loc_4025D1: call set_Client
+  loc_4025D6: ret
+
+
+GetList
+
+  Code: FatFormat
+  Start: 4025E4
+  Size: 68
+  Flag: MoreSects InitLocals
+  Max Stack: 3
+  Local Variables: 11000004
+
+  loc_4025E4: newobj .ctor
+  loc_4025E9: stloc.0
+  loc_4025EA: push Me
+  loc_4025EB: callvirt GetEnumerator
+  loc_4025F0: stloc.1
+  loc_4025F1: br.s loc_40260D
+  loc_4025F3: ldloca.s 1
+  loc_4025F5: call get_Current
+  loc_4025FA: stloc.2
+  loc_4025FB: ldloc.0
+  loc_4025FC: ldloc.2
+  loc_4025FD: push list
+  loc_4025FE: newobj .ctor
+  loc_402603: callvirt Add
+  loc_402608: leave.s loc_40260D
+  loc_40260A: pop
+  loc_40260B: leave.s loc_40260D
+  loc_40260D: ldloca.s 1
+  loc_40260F: call MoveNext
+  loc_402614: brtrue.sbrinst.s loc_4026F3
+  loc_402616: leave.s loc_402626
+  loc_402618: ldloca.s 1
+  loc_40261A: unused
+  loc_40261C: push str_166
+  loc_40261D: nop
+  loc_40261E: nop
+  loc_40261F: ldc.i4.5
+  loc_402620: callvirt Dispose
+  loc_402625: endfinallyendfault
+  loc_402626: ldloc.0
+  loc_402627: ret
+
+  .try loc_4025FB to loc_40260A catch handler loc_40260A to loc_40260D
+  .try loc_4025F1 to loc_402618 catch handler loc_402618 to loc_402626
+
+
+'Object: VKBot.Helpers.ProxyScraper
+get_Urls
+
+  Code: TinyFormat
+  Start: 402645
+  Size: 6
+
+  loc_402645: ldsfld <Urls>k__BackingField
+  loc_40264A: ret
+
+
+set_Urls
+
+  Code: TinyFormat
+  Start: 40264C
+  Size: 7
+
+  loc_40264C: push Me
+  loc_40264D: stsfld <Urls>k__BackingField
+  loc_402652: ret
+
+
+get_Proxy_re
+
+  Code: TinyFormat
+  Start: 402654
+  Size: 6
+
+  loc_402654: ldsfld <Proxy_re>k__BackingField
+  loc_402659: ret
+
+
+set_Proxy_re
+
+  Code: TinyFormat
+  Start: 40265B
+  Size: 7
+
+  loc_40265B: push Me
+  loc_40265C: stsfld <Proxy_re>k__BackingField
+  loc_402661: ret
+
+
+get_Time
+
+  Code: TinyFormat
+  Start: 402663
+  Size: 7
+
+  loc_402663: push Me
+  loc_402664: ldfld <Time>k__BackingField
+  loc_402669: ret
+
+
+set_Time
+
+  Code: TinyFormat
+  Start: 40266B
+  Size: 8
+
+  loc_40266B: push Me
+  loc_40266C: push value
+  loc_40266D: stfld <Time>k__BackingField
+  loc_402672: ret
+
+
+get_FileName
+
+  Code: TinyFormat
+  Start: 402674
+  Size: 7
+
+  loc_402674: push Me
+  loc_402675: ldfld <FileName>k__BackingField
+  loc_40267A: ret
+
+
+set_FileName
+
+  Code: TinyFormat
+  Start: 40267C
+  Size: 8
+
+  loc_40267C: push Me
+  loc_40267D: push value
+  loc_40267E: stfld <FileName>k__BackingField
+  loc_402683: ret
+
+
+get_Proxies
+
+  Code: TinyFormat
+  Start: 402685
+  Size: 7
+
+  loc_402685: push Me
+  loc_402686: ldfld <Proxies>k__BackingField
+  loc_40268B: ret
+
+
+set_Proxies
+
+  Code: TinyFormat
+  Start: 40268D
+  Size: 8
+
+  loc_40268D: push Me
+  loc_40268E: push value
+  loc_40268F: stfld <Proxies>k__BackingField
+  loc_402694: ret
+
+
+.ctor
+
+  Code: FatFormat
+  Start: 4026A4
+  Size: 75
+  Flag: InitLocals
+  Max Stack: 5
+  Local Variables: 11000005
+
+  loc_4026A4: push Me
+  loc_4026A5: call get_UtcNow
+  loc_4026AA: ldc.i4 1970
+  loc_4026AF: ldc.i4.1
+  loc_4026B0: ldc.i4.1
+  loc_4026B1: newobj .ctor
+  loc_4026B6: call op_Subtraction
+  loc_4026BB: stloc.0
+  loc_4026BC: ldloca.s 0
+  loc_4026BE: call get_TotalSeconds
+  loc_4026C3: conv.i4
+  loc_4026C4: stfld <Time>k__BackingField
+  loc_4026C9: push Me
+  loc_4026CA: newobj .ctor
+  loc_4026CF: stfld locker
+  loc_4026D4: push Me
+  loc_4026D5: call .ctor
+  loc_4026DA: push Me
+  loc_4026DB: ldc.i4.1
+  loc_4026DC: stfld proxyType
+  loc_4026E1: push Me
+  loc_4026E2: ldc.i4.1
+  loc_4026E3: stfld isPublic
+  loc_4026E8: push Me
+  loc_4026E9: call Scrape
+  loc_4026EE: ret
+
+
+.ctor
+
+  Code: FatFormat
+  Start: 4026FC
+  Size: 115
+  Flag: InitLocals
+  Max Stack: 5
+  Local Variables: 11000005
+
+  loc_4026FC: push Me
+  loc_4026FD: call get_UtcNow
+  loc_402702: ldc.i4 1970
+  loc_402707: ldc.i4.1
+  loc_402708: ldc.i4.1
+  loc_402709: newobj .ctor
+  loc_40270E: call op_Subtraction
+  loc_402713: stloc.0
+  loc_402714: ldloca.s 0
+  loc_402716: call get_TotalSeconds
+  loc_40271B: conv.i4
+  loc_40271C: stfld <Time>k__BackingField
+  loc_402721: push Me
+  loc_402722: newobj .ctor
+  loc_402727: stfld locker
+  loc_40272C: push Me
+  loc_40272D: call .ctor
+  loc_402732: push str_166
+  loc_402733: ldc.i4.1
+  loc_402734: sub
+  loc_402735: switch loc_402748, loc_402751, loc_40275A
+  loc_402746: br.s loc_402761
+  loc_402748: push Me
+  loc_402749: ldc.i4.0
+  loc_40274A: stfld proxyType
+  loc_40274F: br.s loc_402761
+  loc_402751: push Me
+  loc_402752: ldc.i4.1
+  loc_402753: stfld proxyType
+  loc_402758: br.s loc_402761
+  loc_40275A: push Me
+  loc_40275B: ldc.i4.3
+  loc_40275C: stfld proxyType
+  loc_402761: push Me
+  loc_402762: push fileName
+  loc_402763: call set_FileName
+  loc_402768: push Me
+  loc_402769: call Scrape
+  loc_40276E: ret
+
+
+.ctor
+
+  Code: FatFormat
+  Start: 40277C
+  Size: 142
+  Flag: MoreSects InitLocals
+  Max Stack: 5
+  Local Variables: 11000006
+
+  loc_40277C: push Me
+  loc_40277D: ldfld locker
+  loc_402782: stloc.0
+  loc_402783: ldc.i4.0
+  loc_402784: stloc.1
+  loc_402785: ldloc.0
+  loc_402786: ldloca.s 1
+  loc_402788: call Enter
+  loc_40278D: ldsfld proxyType
+  loc_402792: brtrue.sbrinst.s loc_4027C7
+  loc_402794: push Me
+  loc_402795: call get_Time
+  loc_40279A: call get_UtcNow
+  loc_40279F: ldc.i4 1970
+  loc_4027A4: ldc.i4.1
+  loc_4027A5: ldc.i4.1
+  loc_4027A6: newobj .ctor
+  loc_4027AB: call op_Subtraction
+  loc_4027B0: stloc.2
+  loc_4027B1: ldloca.s 2
+  loc_4027B3: call get_TotalSeconds
+  loc_4027B8: conv.i4
+  loc_4027B9: ldc.i4 150
+  loc_4027BE: sub
+  loc_4027BF: bge.s loc_4027C7
+  loc_4027C1: push Me
+  loc_4027C2: call Scrape
+  loc_4027C7: leave.s loc_4027D3
+  loc_4027C9: ldloc.1
+  loc_4027CA: brfalse.sbrnull.sbrzero.s loc_4027D2
+  loc_4027CC: ldloc.0
+  loc_4027CD: call Exit
+  loc_4027D2: endfinallyendfault
+  loc_4027D3: push Me
+  loc_4027D4: ldfld proxies
+  loc_4027D9: callvirt get_Count
+  loc_4027DE: brtrue.sbrinst.s loc_4027FE
+  loc_4027E0: push Me
+  loc_4027E1: call get_Proxies
+  loc_4027E6: callvirt get_Count
+  loc_4027EB: brfalse.sbrnull.sbrzero.s loc_4027FE
+  loc_4027ED: push Me
+  loc_4027EE: push Me
+  loc_4027EF: call get_Proxies
+  loc_4027F4: newobj .ctor
+  loc_4027F9: stfld proxies
+  loc_4027FE: push Me
+  loc_4027FF: ldfld proxies
+  loc_402804: callvirt Dequeue
+  loc_402809: ret
+
+  .try loc_402785 to loc_4027C9 catch handler loc_4027C9 to loc_4027D3
+
+
+Scrape
+
+  Code: TinyFormat
+  Start: 40281D
+  Size: 40
+
+  loc_40281D: push Me
+  loc_40281E: ldfld isPublic
+  loc_402823: brtrue.sbrinst.s loc_40282D
+  loc_402825: push Me
+  loc_402826: call fromFile
+  loc_40282B: br.s loc_402833
+  loc_40282D: push Me
+  loc_40282E: call fromUrls
+  loc_402833: push Me
+  loc_402834: push Me
+  loc_402835: call get_Proxies
+  loc_40283A: newobj .ctor
+  loc_40283F: stfld proxies
+  loc_402844: ret
+
+
+fromFile
+
+  Code: FatFormat
+  Start: 402854
+  Size: 39
+  Flag: InitLocals
+  Max Stack: 3
+  Local Variables: 11000007
+
+  loc_402854: push Me
+  loc_402855: call get_FileName
+  loc_40285A: call ReadAllText
+  loc_40285F: stloc.0
+  loc_402860: push Me
+  loc_402861: ldloc.0
+  loc_402862: call GetProxies
+  loc_402867: stloc.1
+  loc_402868: push Me
+  loc_402869: ldloc.1
+  loc_40286A: push Me
+  loc_40286B: ldfld proxyType
+  loc_402870: call GetList
+  loc_402875: call set_Proxies
+  loc_40287A: ret
+
+
+fromUrls
+
+  Code: FatFormat
+  Start: 402888
+  Size: 153
+  Flag: MoreSects InitLocals
+  Max Stack: 5
+  Local Variables: 11000008
+
+  loc_402888: newobj .ctor
+  loc_40288D: stloc.0
+  loc_40288E: newobj .ctor
+  loc_402893: stloc.1
+  loc_402894: call get_Urls
+  loc_402899: stloc.2
+  loc_40289A: ldc.i4.0
+  loc_40289B: stloc.3
+  loc_40289C: br.s loc_4028D6
+  loc_40289E: ldloc.2
+  loc_40289F: ldloc.3
+  loc_4028A0: ldelem.ref
+  loc_4028A1: stloc.s 4
+  loc_4028A3: ldloc.1
+  loc_4028A4: ldloc.s 4
+  loc_4028A6: ldnull
+  loc_4028A7: callvirt Get
+  loc_4028AC: callvirt ToString
+  loc_4028B1: stloc.s 5
+  loc_4028B3: push Me
+  loc_4028B4: ldloc.s 5
+  loc_4028B6: call GetProxies
+  loc_4028BB: ldloc.0
+  loc_4028BC: dup
+  loc_4028BD: ldvirtftn Add
+  loc_4028C3: newobj .ctor
+  loc_4028C8: callvirt ForEach
+  loc_4028CD: leave.s loc_4028D2
+  loc_4028CF: pop
+  loc_4028D0: leave.s loc_4028D2
+  loc_4028D2: ldloc.3
+  loc_4028D3: ldc.i4.1
+  loc_4028D4: add
+  loc_4028D5: stloc.3
+  loc_4028D6: ldloc.3
+  loc_4028D7: ldloc.2
+  loc_4028D8: ldlen
+  loc_4028D9: conv.i4
+  loc_4028DA: blt.s loc_40299E
+  loc_4028DC: leave.s loc_4028E8
+  loc_4028DE: ldloc.1
+  loc_4028DF: brfalse.sbrnull.sbrzero.s loc_4028E7
+  loc_4028E1: ldloc.1
+  loc_4028E2: callvirt Dispose
+  loc_4028E7: endfinallyendfault
+  loc_4028E8: push Me
+  loc_4028E9: ldloc.0
+  loc_4028EA: push Me
+  loc_4028EB: ldfld proxyType
+  loc_4028F0: call GetList
+  loc_4028F5: call set_Proxies
+  loc_4028FA: push Me
+  loc_4028FB: call get_UtcNow
+  loc_402900: ldc.i4 1970
+  loc_402905: ldc.i4.1
+  loc_402906: ldc.i4.1
+  loc_402907: newobj .ctor
+  loc_40290C: call op_Subtraction
+  loc_402911: stloc.s 6
+  loc_402913: ldloca.s 6
+  loc_402915: call get_TotalSeconds
+  loc_40291A: conv.i4
+  loc_40291B: call set_Time
+  loc_402920: ret
+
+  .try loc_4028A3 to loc_4028CF catch handler loc_4028CF to loc_4028D2
+  .try loc_402894 to loc_4028DE catch handler loc_4028DE to loc_4028E8
+
+
+GetProxies
+
+  Code: FatFormat
+  Start: 40294C
+  Size: 97
+  Flag: MoreSects InitLocals
+  Max Stack: 2
+  Local Variables: 11000009
+
+  loc_40294C: newobj .ctor
+  loc_402951: stloc.0
+  loc_402952: call get_Proxy_re
+  loc_402957: push str
+  loc_402958: callvirt Matches
+  loc_40295D: callvirt GetEnumerator
+  loc_402962: stloc.1
+  loc_402963: br.s loc_40298B
+  loc_402965: ldloc.1
+  loc_402966: callvirt get_Current
+  loc_40296B: castclass System.Text.RegularExpressions.Match
+  loc_402970: stloc.2
+  loc_402971: ldloc.0
+  loc_402972: ldloc.2
+  loc_402973: callvirt get_Value
+  loc_402978: callvirt Contains
+  loc_40297D: brtrue.sbrinst.s loc_40298B
+  loc_40297F: ldloc.0
+  loc_402980: ldloc.2
+  loc_402981: callvirt get_Value
+  loc_402986: callvirt Add
+  loc_40298B: ldloc.1
+  loc_40298C: callvirt MoveNext
+  loc_402991: brtrue.sbrinst.s loc_402A65
+  loc_402993: leave.s loc_4029A6
+  loc_402995: ldloc.1
+  loc_402996: isinst System.IDisposable
+  loc_40299B: stloc.3
+  loc_40299C: ldloc.3
+  loc_40299D: brfalse.sbrnull.sbrzero.s loc_4029A5
+  loc_40299F: ldloc.3
+  loc_4029A0: callvirt Dispose
+  loc_4029A5: endfinallyendfault
+  loc_4029A6: leave.s loc_4029AB
+  loc_4029A8: pop
+  loc_4029A9: leave.s loc_4029AB
+  loc_4029AB: ldloc.0
+  loc_4029AC: ret
+
+  .try loc_402963 to loc_402995 catch handler loc_402995 to loc_4029A6
+  .try loc_402952 to loc_4029A8 catch handler loc_4029A8 to loc_4029AB
+
+
+.cctor
+
+  Code: TinyFormat
+  Start: 4029CD
+  Size: 60
+
+  loc_4029CD: ldc.i4.4
+  loc_4029CE: newarr System.
+  loc_4029D3: dup
+  loc_4029D4: ldc.i4.0
+  loc_4029D5: push "https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt"
+  loc_4029DA: stelem.ref
+  loc_4029DB: dup
+  loc_4029DC: ldc.i4.1
+  loc_4029DD: push "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt"
+  loc_4029E2: stelem.ref
+  loc_4029E3: dup
+  loc_4029E4: ldc.i4.2
+  loc_4029E5: push "https://api.proxyscrape.com/?request=getproxies&proxytype=socks4&timeout=9000&ssl=yes"
+  loc_4029EA: stelem.ref
+  loc_4029EB: dup
+  loc_4029EC: ldc.i4.3
+  loc_4029ED: push "https://www.proxy-list.download/api/v1/get?type=socks4"
+  loc_4029F2: stelem.ref
+  loc_4029F3: stsfld <Urls>k__BackingField
+  loc_4029F8: push "\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):[0-9]{1,5}\b"
+  loc_4029FD: ldc.i4.8
+  loc_4029FE: newobj .ctor
+  loc_402A03: stsfld <Proxy_re>k__BackingField
+  loc_402A08: ret
+
+
